@@ -20,9 +20,9 @@ jobs:
           ../Resources/CreateOHIFDist.sh
           cmake .. -DSTATIC_BUILD=ON -DCMAKE_BUILD_TYPE=Release
           make
-          ls -l
+          ls
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v2
         with:
-          name: ohif
-          path: Build/ohif
+          name: libOrthancOHIF.so
+          path: Build/libOrthancOHIF.so
