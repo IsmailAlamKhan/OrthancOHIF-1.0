@@ -20,6 +20,7 @@ jobs:
           ../Resources/CreateOHIFDist.sh
           cmake .. -DSTATIC_BUILD=ON -DCMAKE_BUILD_TYPE=Release
           make
+          ls -l
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v2
         with:
