@@ -32,9 +32,9 @@ jobs:
             -DUSE_LEGACY_JSONCPP=ON
           make
           ls
-      - name: ".so to .dll Using dlltool"
-        run: |
-          dlltool -d libOrthancOHIF.def -l libOrthancOHIF.a
+      # - name: ".so to .dll Using dlltool"
+      #   run: |
+      #     dlltool -d libOrthancOHIF.def -l libOrthancOHIF.a
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v2
