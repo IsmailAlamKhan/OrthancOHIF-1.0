@@ -51,7 +51,8 @@ fi
 if [ ! -f "${ROOT_DIR}/OHIF/${PACKAGE}.tar.gz" ]; then
     mkdir -p "${ROOT_DIR}/OHIF"
     ( cd ${ROOT_DIR}/OHIF && \
-          wget https://orthanc.uclouvain.be/third-party-downloads/OHIF/${PACKAGE}.tar.gz )
+        #   wget https://orthanc.uclouvain.be/third-party-downloads/OHIF/${PACKAGE}.tar.gz )
+        wget https://github.com/IsmailAlamKhan/OrthancOHIF-1.0/releases/download/viewers/Viewers-3.6.0.tar.gz )
 fi
 
 mkdir -p ${ROOT_DIR}/OHIF/dist/
