@@ -32,8 +32,8 @@ jobs:
             -DUSE_LEGACY_JSONCPP=ON
           make
           ls
-      # - name: Upload a Build Artifact
-      #   uses: actions/upload-artifact@v2
-      #   with:
-      #     name: libOrthancOHIF.so
-      #     path: Build/libOrthancOHIF.so
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: libOrthancOHIF.so
+          path: Build/libOrthancOHIF.so
