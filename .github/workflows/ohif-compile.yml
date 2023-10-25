@@ -10,7 +10,7 @@ on:
 jobs:
   build-windows:
     runs-on: ubuntu-latest
-    
+
     steps:
       - uses: actions/checkout@v3
       - name: build ohif
@@ -19,7 +19,7 @@ jobs:
           cd Build
           ../Resources/CreateOHIFDist.sh
           cmake .. -DSTATIC_BUILD=ON -DCMAKE_BUILD_TYPE=Release
-          make
+          make LDFLAGS="-no-undefined
           ls
       - name: Build orthanc
         run: |
