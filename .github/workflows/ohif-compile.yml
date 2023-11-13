@@ -40,8 +40,8 @@ jobs:
       - name: Upload artifact 64
         uses: actions/upload-artifact@v2
         with:
-          name: libOrthancOHIF.dll
-          path: Build/libOrthancOHIF64.dll
+          name: libOrthancOHIF64.dll
+          path: Build/libOrthancOHIF.dll
 
       - name: Clear Build
         run: |
@@ -72,5 +72,5 @@ jobs:
       - name: Upload artifact 32
         uses: actions/upload-artifact@v2
         with:
-          name: libOrthancOHIF.dll
-          path: Build/libOrthancOHIF32.dll
+          name: libOrthancOHIF32.dll
+          path: Build/libOrthancOHIF.dll
