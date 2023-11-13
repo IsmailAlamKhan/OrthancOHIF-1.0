@@ -13,31 +13,50 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+      - name: Setup
+        run: sudo apt install -y tree g++-mingw-w64
       - name: build ohif
         run: |
-          mkdir Build
-          cd Build
           ../Resources/CreateOHIFDist.sh
           cmake .. -DSTATIC_BUILD=ON -DCMAKE_BUILD_TYPE=Release
           make
           ls
-      - name: Build orthanc
+      - name: Build orthanc(64)
         run: |
-          cd Build
+
+          mkdir Build && cd Build
           cmake .. \
             -DCMAKE_BUILD_TYPE=Release \
-            -DCMAKE_TOOLCHAIN_FILE=~/Orthanc/Resources/MinGW-W64-Toolchain32.cmake \
+            -DCMAKE_TOOLCHAIN_FILE=~/Orthanc/Resources/MinGW-W64-Toolchain64.cmake \
             -DSTANDALONE_BUILD=ON \
             -DSTATIC_BUILD=ON \
             -DUSE_LEGACY_JSONCPP=ON
           make
           ls
-      # - name: ".so to .dll Using dlltool"
-      #   run: |
-      #     dlltool -d libOrthancOHIF.def -l libOrthancOHIF.a
 
-      - name: Upload a Build Artifact
+      - name: Upload artifact 64
         uses: actions/upload-artifact@v2
         with:
-          name: libOrthancOHIF.so
-          path: Build/libOrthancOHIF.so
+          name: libOrthancOHIF64.dll
+          path: Build/libOrthancOHIF64.dll
+
+      - name: Clear Build
+        run: rm -rf Build
+
+      - name: Build orthanc(32)
+        run: |
+
+          mkdir Build && cd Build
+          cmake .. \
+            -DCMAKE_BUILD_TYPE=Release \
+            -DCMAKE_TOOLCHAIN_FILE=~/Orthanc/Resources/MinGW-W64-Toolchain32.cmake \
+            -DSTANDALONE_BUILD=ON \
+            -DSTATIC_BUILD=ON \
+            -DUSE_LEGACY_JSONCPP=ON \
+            -DUSE_LEGACY_JSONCPP=ON \
+
+      - name: Upload artifact 32
+        uses: actions/upload-artifact@v2
+        with:
+          name: libOrthancOHIF32.dll
+          path: Build/libOrthancOHIF32.dll
