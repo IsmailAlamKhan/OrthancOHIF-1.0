@@ -15,22 +15,24 @@ jobs:
       - uses: actions/checkout@v3
       - name: Setup
         run: sudo apt install -y tree g++-mingw-w64
-      - name: build ohif
+      - name: build ohif(64)
         run: |
-          Resources/CreateOHIFDist.sh
-          cmake .. -DSTATIC_BUILD=ON -DCMAKE_BUILD_TYPE=Release
+          mkdir Build && cd Build
+          ../Resources/CreateOHIFDist.sh
+          cmake .. \
+            -DCMAKE_BUILD_TYPE=Release \
+            -DCMAKE_TOOLCHAIN_FILE=../Resources/Orthanc/Toolchains/MinGW-W64-Toolchain64.cmake \
+            -DSTANDALONE_BUILD=ON \
+            -DSTATIC_BUILD=ON
           make
           ls
       - name: Build orthanc(64)
         run: |
-
-          mkdir Build && cd Build
           cmake .. \
             -DCMAKE_BUILD_TYPE=Release \
             -DCMAKE_TOOLCHAIN_FILE=~/Orthanc/Resources/MinGW-W64-Toolchain64.cmake \
             -DSTANDALONE_BUILD=ON \
             -DSTATIC_BUILD=ON \
-            -DUSE_LEGACY_JSONCPP=ON
           make
           ls
 
@@ -43,6 +45,18 @@ jobs:
       - name: Clear Build
         run: rm -rf Build
 
+      - name: Build ohif(32)
+        run: |
+          mkdir Build && cd Build
+          ../Resources/CreateOHIFDist.sh
+          cmake .. \
+            -DCMAKE_BUILD_TYPE=Release \
+            -DCMAKE_TOOLCHAIN_FILE=../Resources/Orthanc/Toolchains/MinGW-W64-Toolchain32.cmake \
+            -DSTANDALONE_BUILD=ON \
+            -DSTATIC_BUILD=ON
+          make
+          ls
+
       - name: Build orthanc(32)
         run: |
 
@@ -52,8 +66,6 @@ jobs:
             -DCMAKE_TOOLCHAIN_FILE=~/Orthanc/Resources/MinGW-W64-Toolchain32.cmake \
             -DSTANDALONE_BUILD=ON \
             -DSTATIC_BUILD=ON \
-            -DUSE_LEGACY_JSONCPP=ON \
-            -DUSE_LEGACY_JSONCPP=ON \
 
       - name: Upload artifact 32
         uses: actions/upload-artifact@v2
