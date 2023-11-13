@@ -17,7 +17,7 @@ jobs:
         run: sudo apt install -y tree g++-mingw-w64
       - name: build ohif
         run: |
-          ../Resources/CreateOHIFDist.sh
+          Resources/CreateOHIFDist.sh
           cmake .. -DSTATIC_BUILD=ON -DCMAKE_BUILD_TYPE=Release
           make
           ls
