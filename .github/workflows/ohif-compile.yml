@@ -28,7 +28,7 @@ jobs:
           ls
       - name: Build orthanc(64)
         run: |
-          cd build
+          cd Build
           cmake .. \
             -DCMAKE_BUILD_TYPE=Release \
             -DCMAKE_TOOLCHAIN_FILE=~/Orthanc/Resources/MinGW-W64-Toolchain64.cmake \
